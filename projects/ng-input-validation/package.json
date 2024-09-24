@@ -1,6 +1,6 @@
 {
   "name": "ng-input-validation",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Une librairie Angular pour la gestion des messages d'erreur de validation dans les formulaires réactifs.",
   "repository": {
     "type": "git",
