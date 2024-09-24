@@ -1,27 +1,75 @@
-# NgInputValidation
+## Compatibilité des Versions
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+La librairie `ng-input-validation` est compatible avec Angular à partir de la version **17**. Assurez-vous d'utiliser une version d'Angular égale ou supérieure pour garantir le bon fonctionnement de la librairie.
 
-## Development server
+## Utilisation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. **Importer le composant** :
 
-## Code scaffolding
+   Dans le module de ton application ou dans le composant parent, importe le module de la librairie :
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+   ```typescript
+   import { NgInputValidationComponent } from "ng-input-validation";
+   import { ReactiveFormsModule } from "@angular/forms";
+   ```
 
-## Build
+   Ajoute `NgInputValidationComponent` et `ReactiveFormsModule` à la liste des imports de ton composant :
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+   ```typescript
+   @Component({
+     selector: "app-parent",
+     standalone: true,
+     imports: [ReactiveFormsModule, NgInputValidationComponent],
+   })
+   export class ParentComponent {
+     // Logique du composant...
+   }
+   ```
 
-## Running unit tests
+2. **Utiliser le composant dans le template** :
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   Utilise le composant `ng-input-validation` dans ton template en lui passant les contrôles et les erreurs :
 
-## Running end-to-end tests
+   ```html
+   <form [formGroup]="form">
+     <div class="form-group">
+       <label for="name">Name</label>
+       <input type="text" id="name" class="form-control" formControlName="name" />
+       <ng-input-validation [error]="form.get('name')?.errors" [control]="form.get('name')" [showError]="true"> </ng-input-validation>
+     </div>
+     <!-- Ajoute d'autres champs de formulaire ici -->
+   </form>
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Propriétés
 
-## Further help
+| Propriété   | Type              | Description                                      |
+| ----------- | ----------------- | ------------------------------------------------ |
+| `control`   | `AbstractControl` | Le contrôle du formulaire à valider.             |
+| `error`     | `any`             | Les erreurs de validation associées au contrôle. |
+| `showError` | `boolean`         | Indique si les erreurs doivent être affichées.   |
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Types d'erreurs gérés Nativement par Angular
+
+La librairie `ng-input-validation` prend en charge les types d'erreurs suivants :
+
+| Type d'erreur | Message d'erreur                     |
+| ------------- | ------------------------------------ |
+| required      | Champ requis                         |
+| email         | Renseignez une adresse e-mail valide |
+| minlength     | xxx caractères minimum               |
+| maxlength     | xxx caractères maximum               |
+| min           | La valeur minimale autorisée est xxx |
+| max           | La valeur maximale autorisée est xxx |
+| pattern       | Le format du champ est invalide      |
+
+Ces messages d'erreur peuvent être personnalisés et affichés dynamiquement en fonction des validations appliquées à chaque champ de formulaire.
+
+## Keywords
+
+- Angular
+- Validation
+- Formulaires
+- Erreurs
+- Librairie
+- ng-input-validation

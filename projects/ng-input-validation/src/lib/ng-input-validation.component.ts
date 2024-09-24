@@ -3,38 +3,38 @@ import { Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 @Component({
-  selector: 'ng-input-validation',
-  standalone: true,
-  imports: [NgIf],
-  template: `
+    selector: 'ng-input-validation',
+    standalone: true,
+    imports: [NgIf],
+    template: `
 <div *ngIf="control && control.invalid && (control.dirty || control.touched)">
-      <div class="common-error-display" *ngIf="error && showError">
-        <div class="text-danger">
-          <p *ngIf="error.required" class="mt-1">Champ requis</p>
-          <p *ngIf="error.email" class="mt-1">Renseignez une adresse e-mail valide</p>
-          <p *ngIf="error.minlength" class="mt-1">
+      <div *ngIf="error && showError">
+        <div class="text-error-validation">
+          <p *ngIf="error.required">Champ requis</p>
+          <p *ngIf="error.email">Renseignez une adresse e-mail valide</p>
+          <p *ngIf="error.minlength">
             {{ error.minlength.requiredLength }} caractères minimum
           </p>
-          <p *ngIf="error.maxlength" class="mt-1">
+          <p *ngIf="error.maxlength">
             {{ error.maxlength.requiredLength }} caractères maximum
           </p>
-          <p *ngIf="error.min" class="mt-1">
+          <p *ngIf="error.min">
             La valeur minimale autorisée est {{ error.min.min }}
           </p>
-          <p *ngIf="error.max" class="mt-1">
+          <p *ngIf="error.max">
             La valeur maximale autorisée est {{ error.max.max }}
           </p>
-          <p *ngIf="error.pattern" class="mt-1">Le format du champ est invalide.</p>
+          <p *ngIf="error.pattern">Le format du champ est invalide.</p>
           <!-- Ajoutez d'autres erreurs personnalisées au besoin -->
         </div>
       </div>
     </div>
   `,
-  styles: ``
+    styleUrl: './ng-input-validation.component.scss'
 })
 export class NgInputValidationComponent {
 
-  @Input({ required: true }) error: any;
-  @Input({ required: true }) showError: boolean = true;
-  @Input({ required: true }) control!: AbstractControl | any;
+    @Input({ required: true }) error: any;
+    @Input({ required: true }) showError: boolean = true;
+    @Input({ required: true }) control!: AbstractControl | any;
 }
