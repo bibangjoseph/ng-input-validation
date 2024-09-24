@@ -10,6 +10,11 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
+    "paths": {
+      "ng-input-validation": [
+        "./dist/ng-input-validation"
+      ]
+    },
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
