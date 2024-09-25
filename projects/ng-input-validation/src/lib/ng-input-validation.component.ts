@@ -1,7 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-
 @Component({
     selector: 'ng-input-validation',
     standalone: true,
@@ -25,7 +24,6 @@ import { AbstractControl } from '@angular/forms';
             La valeur maximale autorisée est {{ error.max.max }}
           </p>
           <p *ngIf="error.pattern">Le format du champ est invalide.</p>
-          <!-- Ajoutez d'autres erreurs personnalisées au besoin -->
         </div>
       </div>
     </div>
@@ -33,7 +31,6 @@ import { AbstractControl } from '@angular/forms';
     styleUrl: './ng-input-validation.component.scss'
 })
 export class NgInputValidationComponent {
-
     @Input({ required: true }) error: any;
     @Input({ required: true }) showError: boolean = true;
     @Input({ required: true }) control!: AbstractControl | any;
