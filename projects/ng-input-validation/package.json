@@ -1,17 +1,17 @@
 {
-  "name": "ng-input-validation",
-  "version": "2.5.0",
-  "description": "Une librairie Angular pour la gestion des messages d'erreur de validation dans les formulaires réactifs.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bibangjoseph/ng-input-validation"
-  },
-  "peerDependencies": {
-    "@angular/common": "^18.2.0",
-    "@angular/core": "^18.2.0"
-  },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
-  "sideEffects": false
+    "name": "ng-input-validation",
+    "version": "2.5.1",
+    "description": "Une librairie Angular pour la gestion des messages d'erreur de validation dans les formulaires réactifs.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bibangjoseph/ng-input-validation"
+    },
+    "peerDependencies": {
+        "@angular/common": "^18.2.0",
+        "@angular/core": "^18.2.0"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    },
+    "sideEffects": false
 }
