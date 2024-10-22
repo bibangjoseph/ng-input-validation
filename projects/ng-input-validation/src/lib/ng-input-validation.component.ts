@@ -1,11 +1,11 @@
-import {NgIf} from '@angular/common';
+import {NgFor, NgIf} from '@angular/common';
 import {Component, Input} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
 
 @Component({
     selector: 'ng-input-validation',
     standalone: true,
-    imports: [NgIf],
+    imports: [NgIf, NgFor],
     template: `
         <div *ngIf="control && control.invalid && (control.dirty || control.touched)">
             <div *ngIf="error && showError">
@@ -41,6 +41,12 @@ import {AbstractControl} from '@angular/forms';
                 </div>
             </div>
         </div>
+
+        <div *ngIf="Array.isArray(backendError[formField]) && backendError[formField]?.length > 0">
+            <div class="text-error-validation">
+                <p *ngFor="let error of backendError[formField]">{{ error }}</p>
+            </div>
+        </div>
     `,
     styleUrl: './ng-input-validation.component.scss'
 })
@@ -48,4 +54,7 @@ export class NgInputValidationComponent {
     @Input({required: true}) error: any;
     @Input({required: true}) showError: boolean = true;
     @Input({required: true}) control!: AbstractControl | any;
+    @Input({required: false}) backendError: any[] = [];
+    @Input({required: false}) formField: any;
+    protected readonly Array = Array;
 }
