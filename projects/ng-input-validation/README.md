@@ -4,7 +4,7 @@ La librairie `ng-input-validation` fournit des composants et des validateurs per
 
 ## Compatibilité des Versions
 
-La librairie `ng-input-validation` est compatible avec Angular à partir de la version **17**. Assurez-vous d'utiliser une version d'Angular égale ou supérieure pour garantir le bon fonctionnement de la librairie.
+La librairie `ng-input-validation` est compatible avec Angular à partir de la version 17 et prend également en charge Angular 18. Assurez-vous d'utiliser une version d'Angular égale ou supérieure pour garantir le bon fonctionnement de la librairie
 
 ## Utilisation
 
@@ -20,7 +20,8 @@ La librairie `ng-input-validation` est compatible avec Angular à partir de la v
 Ajoute `NgInputValidationComponent` et `ReactiveFormsModule` à la liste des imports de ton composant :
 
    ```typescript
-   @Component({
+
+@Component({
     selector: "app-parent",
     standalone: true,
     imports: [ReactiveFormsModule, NgInputValidationComponent],
@@ -39,7 +40,7 @@ export class ParentComponent {
      <div class="form-group">
        <label for="name">Name</label>
        <input type="text" id="name" class="form-control" formControlName="name" />
-       <ng-input-validation [error]="form.get('name')?.errors" [control]="form.get('name')" [showError]="true"></ng-input-validation>
+       <ng-input-validation [error]="form.get('name')?.errors" [control]="form.get('name')" [showError]="true" [errorMessages]="customMessages"></ng-input-validation>
      </div>
      <!-- Ajoute d'autres champs de formulaire ici -->
    </form>
@@ -47,11 +48,46 @@ export class ParentComponent {
 
 ## Propriétés
 
-| Propriété   | Type              | Description                                      |
-|-------------|-------------------|--------------------------------------------------|
-| `control`   | `AbstractControl` | Le contrôle du formulaire à valider.             |
-| `error`     | `any`             | Les erreurs de validation associées au contrôle. |
-| `showError` | `boolean`         | Indique si les erreurs doivent être affichées.   |
+| Propriété       | Type              | Description                                                               |
+|-----------------|-------------------|---------------------------------------------------------------------------|
+| `control`       | `AbstractControl` | Le contrôle du formulaire à valider.                                      |
+| `error`         | `any`             | Les erreurs de validation associées au contrôle.                          |
+| `showError`     | `boolean`         | Indique si les erreurs doivent être affichées.                            |
+| `errorMessages` | `any`             | Objet optionnel pour personnaliser les messages d'erreurs par validation. |
+
+## Personnalisation des Messages d'Erreurs
+
+La librairie `ng-input-validation` permet de personnaliser les messages d'erreurs affichés pour chaque type de validation. Vous pouvez passer un objet `errorMessages` en option pour personnaliser les messages d'erreurs pour chaque type de validation.
+
+Voici un exemple de personnalisation des messages d'erreurs :
+
+```typescript
+    customMessages = {
+    required: 'Ce champ est obligatoire.',
+    email: 'Veuillez entrer un e-mail valide.',
+    minlength: 'La longueur minimale est de {requiredLength} caractères.',
+    maxlength: 'La longueur maximale est de {requiredLength} caractères.',
+    numeric: 'Seuls les chiffres sont autorisés.',
+    alphaNumeric: 'Lettres et chiffres uniquement.',
+    telephone: 'Numéro de téléphone invalide.',
+    invalidNip: 'Le NIP est invalide. Format attendu: 00-0000-00000000 ou 0A-0000-00000000.',
+    min: 'La valeur minimale autorisée est {min}.',
+    max: 'La valeur maximale autorisée est {max}.',
+    pattern: 'Le format du champ est invalide.'
+};
+```
+
+## Exemple dynamique dans le template
+
+```html
+    <p *ngIf="error.min">{{ errorMessages?.min || ('La valeur minimale autorisée est ' + error.min.min) }}</p>
+<p *ngIf="error.max">{{ errorMessages?.max || ('La valeur maximale autorisée est ' + error.max.max) }}</p>
+<p *ngIf="error.invalidNip">{{ errorMessages?.invalidNip || 'Le NIP est invalide. Format attendu: 00-0000-00000000 ou 0A-0000-00000000.' }}</p>
+<p *ngIf="error.telephone">{{ errorMessages?.telephone || 'Le numéro de téléphone est invalide. Il doit commencer par 077, 066, 065, 074, 062, ou 011.' }}</p>
+<p *ngIf="error.numeric">{{ errorMessages?.numeric || 'Ce champ ne doit contenir que des chiffres.' }}</p>
+<p *ngIf="error.alphaNumeric">{{ errorMessages?.alphaNumeric || 'Ce champ ne doit contenir que des lettres majuscules et des chiffres.' }}</p>
+<p *ngIf="error.pattern">{{ errorMessages?.pattern || 'Le format du champ est invalide.' }}</p>
+```
 
 ## Types d'erreurs gérés Nativement par Angular
 
@@ -183,14 +219,6 @@ La librairie `ng-input-validation` permet également d'afficher les erreurs renv
 3. **Affichage dans le template :**
 
    Le composant `ng-input-validation` affichera automatiquement les erreurs sous chaque champ de formulaire correspondant si le tableau `backendError` contient des erreurs pour ce champ. Exemple de code :
-
-   ```html
-   <div *ngIf="Array.isArray(backendError[formField]) && backendError[formField]?.length > 0">
-       <div class="text-error-validation">
-           <p *ngFor="let error of backendError[formField]">{{ error }}</p>
-       </div>
-   </div>
-   ```
 
 ### Propriétés pour les erreurs backend
 
