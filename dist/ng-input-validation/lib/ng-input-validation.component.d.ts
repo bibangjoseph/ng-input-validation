@@ -4,6 +4,9 @@ export declare class NgInputValidationComponent {
     error: any;
     showError: boolean;
     control: AbstractControl | any;
+    backendError: any[];
+    formField: any;
+    protected readonly Array: ArrayConstructor;
     static ɵfac: i0.ɵɵFactoryDeclaration<NgInputValidationComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<NgInputValidationComponent, "ng-input-validation", never, { "error": { "alias": "error"; "required": true; }; "showError": { "alias": "showError"; "required": true; }; "control": { "alias": "control"; "required": true; }; }, {}, never, never, true, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NgInputValidationComponent, "ng-input-validation", never, { "error": { "alias": "error"; "required": true; }; "showError": { "alias": "showError"; "required": true; }; "control": { "alias": "control"; "required": true; }; "backendError": { "alias": "backendError"; "required": false; }; "formField": { "alias": "formField"; "required": false; }; }, {}, never, never, true, never>;
 }

@@ -141,6 +141,66 @@ Voici comment vous pouvez utiliser les validations personnalisées dans un formu
     - **nipValidator()** : Valide que le champ contient un NIP valide (format `14-0020-19931130` ou `1Z-0020-19931130`).
     - **telephoneValidator()** : Valide que le champ contient un numéro de téléphone valide qui commence par 077, 066, 065, 074, 062 ou 011 et suit le format `077 XX XX XX`.
 
+## Gestion des Erreurs Provenant du Backend
+
+La librairie `ng-input-validation` permet également d'afficher les erreurs renvoyées par le backend directement dans le formulaire. Cela peut être utile lorsque vous recevez des erreurs de validation depuis une API ou un service backend et que vous souhaitez les afficher aux utilisateurs.
+
+### Utilisation des erreurs backend
+
+1. **Ajout des propriétés `backendError` et `formField`** :
+
+   Vous pouvez passer un tableau d'erreurs renvoyées par le backend en utilisant la propriété `backendError`, associée à un champ spécifique du formulaire via la propriété `formField`.
+
+   Exemple d'utilisation dans un template Angular :
+
+   ```html
+   <form [formGroup]="form">
+     <div class="form-group">
+       <label for="email">Email</label>
+       <input type="text" id="email" class="form-control" formControlName="email" />
+       <ng-input-validation [error]="form.get('email')?.errors"
+                            [control]="form.get('email')"
+                            [showError]="true"
+                            [backendError]="backendErrors"
+                            [formField]="'email'">
+       </ng-input-validation>
+     </div>
+     <!-- Ajoutez d'autres champs ici -->
+   </form>
+   ```
+
+2. **Structure des erreurs backend** :
+
+   L'erreur backend est un tableau d'erreurs associé à chaque champ du formulaire. Voici un exemple de la structure des erreurs que vous pouvez recevoir :
+
+   ```json
+   {
+     "email": ["L'adresse e-mail est invalide", "L'adresse e-mail est déjà utilisée"],
+     "password": ["Le mot de passe est trop court"]
+   }
+   ```
+
+3. **Affichage dans le template :**
+
+   Le composant `ng-input-validation` affichera automatiquement les erreurs sous chaque champ de formulaire correspondant si le tableau `backendError` contient des erreurs pour ce champ. Exemple de code :
+
+   ```html
+   <div *ngIf="Array.isArray(backendError[formField]) && backendError[formField]?.length > 0">
+       <div class="text-error-validation">
+           <p *ngFor="let error of backendError[formField]">{{ error }}</p>
+       </div>
+   </div>
+   ```
+
+### Propriétés pour les erreurs backend
+
+| Propriété      | Type    | Description                                               |
+|----------------|---------|-----------------------------------------------------------|
+| `backendError` | `any[]` | Un tableau contenant les erreurs provenant du backend.    |
+| `formField`    | `any`   | Le champ de formulaire auquel les erreurs sont associées. |
+
+Cette fonctionnalité permet de gérer de manière fluide l'affichage des messages d'erreurs venant du backend directement dans vos formulaires Angular.
+
 ## Keywords
 
 - Angular

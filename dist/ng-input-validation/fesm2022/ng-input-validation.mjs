@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import * as i0 from '@angular/core';
 import { Component, Input } from '@angular/core';
 
@@ -6,8 +6,11 @@ class NgInputValidationComponent {
     error;
     showError = true;
     control;
+    backendError = [];
+    formField;
+    Array = Array;
     static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: NgInputValidationComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.5", type: NgInputValidationComponent, isStandalone: true, selector: "ng-input-validation", inputs: { error: "error", showError: "showError", control: "control" }, ngImport: i0, template: `
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "18.2.5", type: NgInputValidationComponent, isStandalone: true, selector: "ng-input-validation", inputs: { error: "error", showError: "showError", control: "control", backendError: "backendError", formField: "formField" }, ngImport: i0, template: `
         <div *ngIf="control && control.invalid && (control.dirty || control.touched)">
             <div *ngIf="error && showError">
                 <div class="text-error-validation">
@@ -42,11 +45,17 @@ class NgInputValidationComponent {
                 </div>
             </div>
         </div>
-    `, isInline: true, styles: [".text-error-validation p{color:red;font-size:12px;margin-top:5px;font-style:italic;font-weight:700}\n"], dependencies: [{ kind: "directive", type: NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
+
+        <div *ngIf="Array.isArray(backendError[formField]) && backendError[formField]?.length > 0">
+            <div class="text-error-validation">
+                <p *ngFor="let error of backendError[formField]">{{ error }}</p>
+            </div>
+        </div>
+    `, isInline: true, styles: [".text-error-validation p{color:red;font-size:12px;margin-top:5px;font-style:italic;font-weight:700}\n"], dependencies: [{ kind: "directive", type: NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: NgFor, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }] });
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: NgInputValidationComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'ng-input-validation', standalone: true, imports: [NgIf], template: `
+            args: [{ selector: 'ng-input-validation', standalone: true, imports: [NgIf, NgFor], template: `
         <div *ngIf="control && control.invalid && (control.dirty || control.touched)">
             <div *ngIf="error && showError">
                 <div class="text-error-validation">
@@ -79,6 +88,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImpor
                     <p *ngIf="error.pattern">Le format du champ est invalide.</p>
 
                 </div>
+            </div>
+        </div>
+
+        <div *ngIf="Array.isArray(backendError[formField]) && backendError[formField]?.length > 0">
+            <div class="text-error-validation">
+                <p *ngFor="let error of backendError[formField]">{{ error }}</p>
             </div>
         </div>
     `, styles: [".text-error-validation p{color:red;font-size:12px;margin-top:5px;font-style:italic;font-weight:700}\n"] }]
@@ -91,6 +106,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImpor
             }], control: [{
                 type: Input,
                 args: [{ required: true }]
+            }], backendError: [{
+                type: Input,
+                args: [{ required: false }]
+            }], formField: [{
+                type: Input,
+                args: [{ required: false }]
             }] } });
 
 /**
