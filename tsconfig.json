@@ -7,6 +7,11 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
+    "paths": {
+      "ng-input-validation": [
+        "./dist/ng-input-validation"
+      ]
+    },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "isolatedModules": true,
@@ -29,6 +34,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ng-input-validation/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ng-input-validation/tsconfig.spec.json"
     }
   ]
 }

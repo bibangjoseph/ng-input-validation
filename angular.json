@@ -93,6 +93,36 @@
           }
         }
       }
+    },
+    "ng-input-validation": {
+      "projectType": "library",
+      "root": "projects/ng-input-validation",
+      "sourceRoot": "projects/ng-input-validation/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-input-validation/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng-input-validation/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ng-input-validation/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

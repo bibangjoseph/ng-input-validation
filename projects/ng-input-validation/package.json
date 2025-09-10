@@ -1,0 +1,17 @@
+{
+  "name": "ng-input-validation",
+  "version": "4.0.0",
+  "description": "Une librairie Angular pour la gestion des messages d'erreur de validation dans les formulaires réactifs.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bibangjoseph/ng-input-validation"
+  },
+  "keywords": ["angular", "validation", "forms", "reactive-forms"],
+  "author": "Votre nom",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": ">=18.0.0",
+    "@angular/core": ">=18.0.0",
+    "@angular/forms": ">=18.0.0"
+  }
+}
