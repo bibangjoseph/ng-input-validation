@@ -98,15 +98,9 @@ form = new FormGroup({
 ```typescript
 // Réponse du backend (Laravel, Django, etc.)
 {
-    "errors"
-:
-    {
-        "email"
-    :
-        ["Cette adresse email est déjà utilisée", "L'email appartient à un compte désactivé"],
-            "telephone"
-    :
-        ["Ce numéro est déjà enregistré"]
+    "errors" : {
+        "email" : ["Cette adresse email est déjà utilisée", "L'email appartient à un compte désactivé"],
+        "telephone": ["Ce numéro est déjà enregistré"]
     }
 }
 ```
