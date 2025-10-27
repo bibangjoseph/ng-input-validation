@@ -12,7 +12,6 @@ Une librairie Angular moderne pour la validation et l'affichage des erreurs de f
 - ✅ **Erreurs backend** : Affichage des erreurs retournées par l'API
 - ✅ **Messages personnalisables** : Possibilité de surcharger tous les messages d'erreur
 - ✅ **Validateur personnalisé** : Téléphone pour la RDC
-- ✅ **Directive de masque** : Formatage automatique du numéro de téléphone
 - ✅ **Standalone** : Compatible avec l'approche moderne d'Angular
 - ✅ **Signals** : Utilise les signals Angular pour une réactivité optimale
 - ✅ **TypeScript** : Entièrement typé
@@ -64,7 +63,7 @@ export class AppComponent {
 | `max`       | La valeur maximale autorisée est X |
 | `pattern`   | Le format du champ est invalide    |
 
-### Validateur personnalisé (RDC)
+### Validateur personnalisé (Gabon)
 
 #### Validateur Téléphone
 
@@ -77,23 +76,6 @@ import {telephoneValidator} from 'ng-input-validation';
 form = new FormGroup({
     telephone: new FormControl('', [Validators.required, telephoneValidator()])
 });
-```
-
-## 🎨 Directive de masque
-
-### Masque Téléphone
-
-Formate automatiquement au format `077 XX XX XX`
-
-```typescript
-import {TelephoneMaskDirective} from 'ng-input-validation';
-
-@Component({
-    imports: [TelephoneMaskDirective],
-    template: `
-    <input formControlName="telephone" telephoneMask placeholder="077 12 34 56">
-  `
-})
 ```
 
 ## 💬 Messages personnalisés
@@ -121,15 +103,10 @@ import {TelephoneMaskDirective} from 'ng-input-validation';
     {
         "email"
     :
-        [
-            "Cette adresse email est déjà utilisée",
-            "L'email appartient à un compte désactivé"
-        ],
+        ["Cette adresse email est déjà utilisée", "L'email appartient à un compte désactivé"],
             "telephone"
     :
-        [
-            "Ce numéro est déjà enregistré"
-        ]
+        ["Ce numéro est déjà enregistré"]
     }
 }
 ```
@@ -161,43 +138,12 @@ export class AppComponent {
 <input
     type="email"
     formControlName="email"
-    (input)="delete backendErrors['email']"
 >
 <ng-input-validation
     [control]="form.get('email')"
     [backendError]="backendErrors"
     [formField]="'email'"
 />
-```
-
-## 🎨 Personnalisation du style
-
-La librairie utilise les classes CSS suivantes :
-
-```css
-.text-error-validation {
-    color: #f44336;
-    font-size: 12px;
-    margin-top: 4px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.error-icon::before {
-    content: "⚠";
-}
-```
-
-Vous pouvez surcharger ces styles dans votre application :
-
-```css
-/* styles.css */
-::ng-deep .text-error-validation {
-    color: #d32f2f;
-    font-size: 14px;
-    font-weight: 500;
-}
 ```
 
 ## 📦 API Complète
@@ -217,20 +163,12 @@ Vous pouvez surcharger ces styles dans votre application :
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {
-    NgInputValidationComponent,
-    telephoneValidator,
-    TelephoneMaskDirective
-} from 'ng-input-validation';
+import {NgInputValidationComponent, telephoneValidator} from 'ng-input-validation';
 
 @Component({
     selector: 'app-register',
     standalone: true,
-    imports: [
-        ReactiveFormsModule,
-        NgInputValidationComponent,
-        TelephoneMaskDirective
-    ],
+    imports: [ReactiveFormsModule, NgInputValidationComponent],
     template: `
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       
@@ -240,7 +178,6 @@ import {
         <input 
           type="email" 
           formControlName="email"
-          (input)="clearError('email')"
         >
         <ng-input-validation 
           [control]="registerForm.get('email')"
@@ -249,14 +186,12 @@ import {
         />
       </div>
 
-      <!-- Téléphone avec masque -->
+      <!-- Téléphone -->
       <div>
         <label>Téléphone</label>
         <input 
           type="tel" 
           formControlName="telephone"
-          telephoneMask
-          (input)="clearError('telephone')"
           placeholder="077 12 34 56"
         >
         <ng-input-validation 
@@ -275,7 +210,6 @@ import {
         <input 
           type="text" 
           formControlName="nom"
-          (input)="clearError('nom')"
         >
         <ng-input-validation 
           [control]="registerForm.get('nom')"
@@ -317,31 +251,7 @@ export class RegisterComponent {
                 });
         }
     }
-
-    clearError(field: string) {
-        delete this.backendErrors[field];
-    }
 }
-```
-
-## 🏗️ Développement
-
-### Construire la librairie
-
-```bash
-ng build ng-input-validation
-```
-
-### Mode watch (développement)
-
-```bash
-ng build ng-input-validation --watch
-```
-
-### Tests unitaires
-
-```bash
-ng test ng-input-validation
 ```
 
 ## 📋 Prérequis
@@ -354,10 +264,6 @@ ng test ng-input-validation
 
 Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
 
-## 📄 Licence
-
-MIT © [Votre Nom]
-
 ## 🔗 Liens utiles
 
 - [Documentation Angular](https://angular.dev)
@@ -366,7 +272,7 @@ MIT © [Votre Nom]
 
 ## ✨ Auteur
 
-Créé avec ❤️ pour la communauté Angular RDC
+Créé avec ❤️ par **BIBANG BEFENE Joseph Donovan** pour la communauté Angular
 
 ---
 

@@ -63,7 +63,7 @@ export class AppComponent {
 | `max`       | La valeur maximale autorisée est X |
 | `pattern`   | Le format du champ est invalide    |
 
-### Validateur personnalisé (RDC)
+### Validateur personnalisé (Gabon)
 
 #### Validateur Téléphone
 
