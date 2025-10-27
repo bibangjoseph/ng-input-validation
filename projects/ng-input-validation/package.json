@@ -1,17 +1,35 @@
 {
-  "name": "ng-input-validation",
-  "version": "4.0.0",
-  "description": "Une librairie Angular pour la gestion des messages d'erreur de validation dans les formulaires réactifs.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bibangjoseph/ng-input-validation"
-  },
-  "keywords": ["angular", "validation", "forms", "reactive-forms"],
-  "author": "Votre nom",
-  "license": "MIT",
-  "peerDependencies": {
-    "@angular/common": ">=18.0.0",
-    "@angular/core": ">=18.0.0",
-    "@angular/forms": ">=18.0.0"
-  }
+    "name": "ng-input-validation",
+    "version": "4.5.1",
+    "description": "Une librairie Angular moderne pour la validation et l'affichage des erreurs de formulaires avec support des erreurs backend.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bibangjoseph/ng-input-validation.git"
+    },
+    "bugs": {
+        "url": "https://github.com/bibangjoseph/ng-input-validation/issues"
+    },
+    "homepage": "https://github.com/bibangjoseph/ng-input-validation#readme",
+    "keywords": [
+        "angular",
+        "validation",
+        "forms",
+        "reactive-forms",
+        "error-handling",
+        "form-validation",
+        "angular-forms",
+        "backend-errors",
+        "rdc",
+        "telephone-validator"
+    ],
+    "author": "BIBANG BEFENE Joseph Donovan",
+    "license": "MIT",
+    "peerDependencies": {
+        "@angular/common": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0",
+        "@angular/core": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0",
+        "@angular/forms": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    }
 }
