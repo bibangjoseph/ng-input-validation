@@ -1,34 +1,38 @@
 .text-error-validation {
-  color: #d9534f;
-  font-size: 12px;
-  margin-top: 5px;
-  font-style: italic;
-  font-weight: bold;
-  line-height: 1.5;
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
+    color: #d9534f;
+    font-size: 12px;
+    margin-top: 5px;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+input.ng-invalid.ng-touched {
+    border-color: #f44336;
 }
 
 .error-icon {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background-color: #d9534f;
-  mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3e%3c/svg%3e") center/contain no-repeat;
-  -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3e%3c/svg%3e") center/contain no-repeat;
-  flex-shrink: 0;
-  margin-top: 1px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: #d9534f;
+    mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3e%3c/svg%3e") center/contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3e%3c/svg%3e") center/contain no-repeat;
+    flex-shrink: 0;
+    margin-top: 1px;
 }
 
 .text-error-validation .error-content {
-  flex: 1;
+    flex: 1;
 }
 
 .text-error-validation span {
-  display: inline;
+    display: inline;
 }
 
 .text-error-validation span:not(:last-child)::after {
-  content: ", ";
+    content: ", ";
 }
