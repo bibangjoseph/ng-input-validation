@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:lib": "ng build ng-input-validation",
+    "publish:lib": "npm run build:lib && cd dist/ng-input-validation && npm publish",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
