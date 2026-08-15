@@ -1,46 +1,27 @@
-import {Component, input} from '@angular/core';
+import {Component, input, inject} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
+import {KeyValuePipe} from '@angular/common';
+import {NG_VALIDATION_MESSAGES, DEFAULT_VALIDATION_MESSAGES} from './config';
 
 @Component({
     selector: 'ng-input-validation',
-    imports: [],
+    imports: [KeyValuePipe],
     standalone: true,
     template: `
         @if (control() && control()!.invalid && (control()!.dirty || control()!.touched)) {
-            @if (control()!.errors; as error) {
+            @if (control()!.errors; as errors) {
                 <div class="text-error-validation">
-                    <i class="error-icon"></i>
-                    @if (error['required']) {
-                        <span>{{ errorMessages()?.required || 'Ce champ est requis' }}</span>
-                    }
-                    @if (error['email']) {
-                        <span>{{ errorMessages()?.email || 'Adresse email invalide' }}</span>
-                    }
-                    @if (error['minlength']) {
-                        <span>{{ errorMessages()?.minlength || (error['minlength']?.requiredLength + ' caractères minimum') }}</span>
-                    }
-                    @if (error['maxlength']) {
-                        <span>{{ errorMessages()?.maxlength || (error['maxlength']?.requiredLength + ' caractères maximum') }}</span>
-                    }
-                    @if (error['min']) {
-                        <span>{{ errorMessages()?.min || ('La valeur minimale autorisée est ' + error['min']?.min) }}</span>
-                    }
-                    @if (error['max']) {
-                        <span>{{ errorMessages()?.max || ('La valeur maximale autorisée est ' + error['max']?.max) }}</span>
-                    }
-                    @if (error['telephone']) {
-                        <span>{{ errorMessages()?.telephone || 'Le numéro de téléphone est invalide. Il doit commencer par 077, 066, 065, 074, 062, ou 011.' }}</span>
-                    }
-                    @if (error['pattern']) {
-                        <span>{{ errorMessages()?.pattern || 'Le format du champ est invalide.' }}</span>
+                    @for (error of errors | keyvalue; track error.key) {
+                        <i class="error-icon"></i>
+                        <span>{{ getErrorMessage(error.key, error.value) }}</span>
                     }
                 </div>
             }
         }
 
-        @if (backendError() && formField() && Array.isArray(backendError()[formField()])) {
+        @if (backendError() && formField() && Array.isArray(backendError()[formField()!])) {
             <div class="text-error-validation">
-                @for (error of backendError()[formField()]; track error) {
+                @for (error of backendError()[formField()!]; track error) {
                     <i class="error-icon"></i>
                     <span>{{ error }}</span>
                 }
@@ -50,9 +31,43 @@ import {AbstractControl} from '@angular/forms';
     styleUrl: './ng-input-validation.css'
 })
 export class NgInputValidationComponent {
-    control = input.required<AbstractControl | any>();
-    backendError = input<any[]>([])
-    errorMessages = input<any>()
-    formField = input<string | any>('');
+    control = input.required<AbstractControl | null>();
+    backendError = input<Record<string, string[]>>({});
+    errorMessages = input<Record<string, string | ((errorValue: any) => string)>>({});
+    formField = input<string>('');
+    
     protected readonly Array = Array;
+    private globalMessages = inject(NG_VALIDATION_MESSAGES, { optional: true });
+
+    getErrorMessage(errorKey: string, errorValue: any): string {
+        // 1. Messages personnalisés via l'input [errorMessages]
+        const customMsg = this.errorMessages()[errorKey];
+        if (customMsg) {
+            return typeof customMsg === 'function' ? customMsg(errorValue) : customMsg;
+        }
+
+        // 2. Messages globaux via InjectionToken NG_VALIDATION_MESSAGES
+        if (this.globalMessages) {
+            const globalMsg = this.globalMessages[errorKey];
+            if (globalMsg) {
+                return typeof globalMsg === 'function' ? globalMsg(errorValue) : globalMsg;
+            }
+        }
+
+        // 3. Messages par défaut de la librairie
+        const defaultMsg = DEFAULT_VALIDATION_MESSAGES[errorKey];
+        if (defaultMsg) {
+            return typeof defaultMsg === 'function' ? defaultMsg(errorValue) : defaultMsg;
+        }
+
+        // 4. Fallback générique ou message provenant directement de l'erreur (si définie sous forme d'objet {message: '...'})
+        if (typeof errorValue === 'string') {
+            return errorValue;
+        }
+        if (errorValue && typeof errorValue === 'object' && errorValue.message) {
+            return errorValue.message;
+        }
+
+        return 'Champ invalide';
+    }
 }

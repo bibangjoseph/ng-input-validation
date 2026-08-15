@@ -5,3 +5,4 @@
 
 export * from './lib/ng-input-validation';
 export * from './lib/validations';
+export * from './lib/config';

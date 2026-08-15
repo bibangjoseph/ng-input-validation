@@ -11,7 +11,7 @@ Une librairie Angular moderne pour la validation et l'affichage des erreurs de f
 - ✅ **Validation frontend complète** : Support de tous les validateurs Angular standards
 - ✅ **Erreurs backend** : Affichage des erreurs retournées par l'API
 - ✅ **Messages personnalisables** : Possibilité de surcharger tous les messages d'erreur
-- ✅ **Validateur personnalisé** : Téléphone pour la RDC
+- ✅ **Validateur personnalisé** : Téléphone pour le Gabon
 - ✅ **Standalone** : Compatible avec l'approche moderne d'Angular
 - ✅ **Signals** : Utilise les signals Angular pour une réactivité optimale
 - ✅ **TypeScript** : Entièrement typé
@@ -89,6 +89,30 @@ form = new FormGroup({
     email: 'Veuillez saisir un email valide'
   }"
 />
+```
+
+### Configuration globale (Injection Token)
+
+Il est possible de configurer les messages d'erreur globalement pour toute l'application en utilisant le token `NG_VALIDATION_MESSAGES`. Cela permet notamment de gérer facilement l'internationalisation (i18n) ou d'uniformiser les messages sans avoir à les redéfinir sur chaque champ.
+
+```typescript
+// app.config.ts ou app.module.ts
+import { ApplicationConfig } from '@angular/core';
+import { NG_VALIDATION_MESSAGES } from 'ng-input-validation';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    {
+      provide: NG_VALIDATION_MESSAGES,
+      useValue: {
+        required: 'Ce champ est obligatoire.',
+        email: 'Le format de l\'email est incorrect.',
+        // Les fonctions sont aussi supportées pour les messages dynamiques
+        minlength: (errorValue: any) => `Il faut au moins ${errorValue.requiredLength} caractères.`
+      }
+    }
+  ]
+};
 ```
 
 ## 🔌 Erreurs Backend
